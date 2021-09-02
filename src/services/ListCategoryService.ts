@@ -1,9 +1,9 @@
 import { Category } from "../models/Category";
-import { CategoryRepository } from "../repositories/CategoriesRepository";
+import { ICategoriesRepository } from "../repositories/ICategoriesRepository";
 
 export class ListCategoryService {
-  private categoryRepository: CategoryRepository;
-  constructor(categoryRepository: CategoryRepository) {
+  private categoryRepository: ICategoriesRepository;
+  constructor(categoryRepository: ICategoriesRepository) {
     this.categoryRepository = categoryRepository;
   }
   execute(): Category[] {

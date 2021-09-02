@@ -1,22 +1,27 @@
 import { Category } from "../models/Category";
+import {
+  ICategoriesRepository,
+  ICreateCategoryDTO,
+} from "./ICategoriesRepository";
 
-interface ICreateCategoryDTO {
-  name: string;
-  description: string;
-}
-
-export class CategoryRepository {
+export class CategoryRepository implements ICategoriesRepository {
   private static instance: CategoryRepository;
   private categories: Category[];
   private constructor() {
     this.categories = [];
   }
+
   static singleton(): CategoryRepository {
     if (this.instance == null) {
       this.instance = new CategoryRepository();
       return this.instance;
     }
     return this.instance;
+  }
+
+  findByName(name: string): Category {
+    console.log(name);
+    throw new Error("Method not implemented.");
   }
   create({ name, description }: ICreateCategoryDTO): Category {
     const category: Category = new Category();

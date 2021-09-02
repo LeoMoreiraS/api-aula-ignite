@@ -1,5 +1,5 @@
 import { Category } from "../models/Category";
-import { CategoryRepository } from "../repositories/CategoriesRepository";
+import { ICategoriesRepository } from "../repositories/ICategoriesRepository";
 
 interface IRequest {
   name: string;
@@ -7,8 +7,8 @@ interface IRequest {
 }
 
 export class CreateCategoryService {
-  private categoryRepository: CategoryRepository;
-  constructor(categoryRepository: CategoryRepository) {
+  private categoryRepository: ICategoriesRepository;
+  constructor(categoryRepository: ICategoriesRepository) {
     this.categoryRepository = categoryRepository;
   }
   execute({ name, description }: IRequest): Category {
