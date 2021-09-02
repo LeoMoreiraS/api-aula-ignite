@@ -1,14 +1,12 @@
 import dotenv from "dotenv";
-import express, { Request, Response } from "express";
+import express from "express";
 
-import { createCourse } from "./routes";
+import { categoriesRoutes } from "./routes/categories.routes";
 
 dotenv.config();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3333;
 
 const app = express();
 app.use(express.json());
-app.get("/", createCourse, (request: Request, response: Response) => {
-  return response.json({ message: "hello" });
-});
+app.use("/categories", categoriesRoutes);
 app.listen(port);
