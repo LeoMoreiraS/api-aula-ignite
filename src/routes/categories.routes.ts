@@ -6,7 +6,7 @@ import { ListCategoryController } from "../modules/cars/controllers/ListCategory
 const categoriesRoutes = Router();
 const createCategoryController = new CreateCategoryController();
 const listCategoryController = new ListCategoryController();
-categoriesRoutes.post("/", createCategoryController.execute);
-categoriesRoutes.get("/", listCategoryController.execute);
+categoriesRoutes.post("/", createCategoryController.handle);
+categoriesRoutes.get("/", listCategoryController.handle);
 
 export { categoriesRoutes };

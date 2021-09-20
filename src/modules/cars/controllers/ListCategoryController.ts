@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 
-import { CategoryRepository } from "../repositories/CategoriesRepository";
+import { CategoryRepository } from "../repositories/implementations/CategoriesRepository";
 import { ListCategoryService } from "../services/ListCategoryService";
 
 const listCategoryService = new ListCategoryService(
   CategoryRepository.singleton()
 );
 export class ListCategoryController {
-  execute(request: Request, response: Response): Response {
+  handle(request: Request, response: Response): Response {
     try {
       const categories = listCategoryService.execute();
       return response.json(categories).status(201);

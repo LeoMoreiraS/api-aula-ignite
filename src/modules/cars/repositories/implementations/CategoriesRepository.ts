@@ -1,8 +1,8 @@
-import { Category } from "../models/Category";
+import { Category } from "../../models/Category";
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,
-} from "./ICategoriesRepository";
+} from "../interfaces/ICategoriesRepository";
 
 export class CategoryRepository implements ICategoriesRepository {
   private static instance: CategoryRepository;
