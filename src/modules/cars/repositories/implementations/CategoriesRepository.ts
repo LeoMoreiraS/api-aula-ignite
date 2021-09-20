@@ -20,8 +20,10 @@ export class CategoryRepository implements ICategoriesRepository {
   }
 
   findByName(name: string): Category {
-    console.log(name);
-    throw new Error("Method not implemented.");
+    const category = this.categories.find(
+      (category: Category) => category.name === name
+    );
+    return category;
   }
   create({ name, description }: ICreateCategoryDTO): Category {
     const category: Category = new Category();
