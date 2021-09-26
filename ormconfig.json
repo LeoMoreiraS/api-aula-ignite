@@ -1,0 +1,13 @@
+{
+    "name":"default",
+    "type":"postgres",
+    "host":"localhost",
+    "username":"leo",
+    "password":"dev",
+    "database":"dbapi",
+    "port":"5432",
+    "migrations":["./src/database/migrations/*.ts"],
+    "cli":{
+        "migrationsDir":"./src/database/migrations"
+    }
+}

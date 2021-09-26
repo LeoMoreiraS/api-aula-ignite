@@ -1,4 +1,4 @@
-import { Category } from "../models/Category";
+import { Category } from "../entities/Category";
 import { ICategoriesRepository } from "../repositories/interfaces/ICategoriesRepository";
 
 interface IRequest {
@@ -11,8 +11,11 @@ export class CreateCategoryService {
   constructor(categoryRepository: ICategoriesRepository) {
     this.categoryRepository = categoryRepository;
   }
-  execute({ name, description }: IRequest): Category {
-    const category = this.categoryRepository.create({ name, description });
+  async execute({ name, description }: IRequest): Promise<Category> {
+    const category = await this.categoryRepository.create({
+      name,
+      description,
+    });
     return category;
   }
 }

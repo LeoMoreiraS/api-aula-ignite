@@ -1,4 +1,4 @@
-import { Category } from "../models/Category";
+import { Category } from "../entities/Category";
 import { ICategoriesRepository } from "../repositories/interfaces/ICategoriesRepository";
 
 export class ListCategoryService {
@@ -6,7 +6,7 @@ export class ListCategoryService {
   constructor(categoryRepository: ICategoriesRepository) {
     this.categoryRepository = categoryRepository;
   }
-  execute(): Category[] {
+  async execute(): Promise<Category[]> {
     const categories = this.categoryRepository.list();
     return categories;
   }

@@ -1,4 +1,6 @@
-import { Category } from "../../models/Category";
+import { getRepository, Repository } from "typeorm";
+
+import { Category } from "../../entities/Category";
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,
@@ -7,8 +9,9 @@ import {
 export class CategoryRepository implements ICategoriesRepository {
   private static instance: CategoryRepository;
   private categories: Category[];
+  private ormRepository: Repository<Category>;
   private constructor() {
-    this.categories = [];
+    this.ormRepository = getRepository(Category);
   }
 
   static singleton(): CategoryRepository {
@@ -19,26 +22,17 @@ export class CategoryRepository implements ICategoriesRepository {
     return this.instance;
   }
 
-  findByName(name: string): Category {
-    const category = this.categories.find(
-      (category: Category) => category.name === name
-    );
+  async findByName(name: string): Promise<Category> {
+    const category = await this.ormRepository.findOne({ name });
     return category;
   }
-  create({ name, description }: ICreateCategoryDTO): Category {
-    const category: Category = new Category();
-    Object.assign(category, { name, description, created_at: new Date() });
-    const categoryExists = this.categories.find(
-      (category) => category.name === name
-    );
-    if (categoryExists) {
-      throw new Error("category Already Exists");
-    }
-    this.categories.push(category);
+  async create({ name, description }: ICreateCategoryDTO): Promise<Category> {
+    const category = this.ormRepository.create({ name, description });
+    await this.ormRepository.save(category);
     return category;
   }
-  list(): Category[] {
-    if (this.categories.length === 0) throw new Error("No categories found");
-    return this.categories;
+  async list(): Promise<Category[]> {
+    const categories = this.ormRepository.find();
+    return categories;
   }
 }
