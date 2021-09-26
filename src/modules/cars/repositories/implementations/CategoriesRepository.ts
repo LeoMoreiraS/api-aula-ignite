@@ -6,20 +6,10 @@ import {
   ICreateCategoryDTO,
 } from "../interfaces/ICategoriesRepository";
 
-export class CategoryRepository implements ICategoriesRepository {
-  private static instance: CategoryRepository;
-  private categories: Category[];
+export class CategoriesRepository implements ICategoriesRepository {
   private ormRepository: Repository<Category>;
-  private constructor() {
+  constructor() {
     this.ormRepository = getRepository(Category);
-  }
-
-  static singleton(): CategoryRepository {
-    if (this.instance == null) {
-      this.instance = new CategoryRepository();
-      return this.instance;
-    }
-    return this.instance;
   }
 
   async findByName(name: string): Promise<Category> {
@@ -32,7 +22,7 @@ export class CategoryRepository implements ICategoriesRepository {
     return category;
   }
   async list(): Promise<Category[]> {
-    const categories = this.ormRepository.find();
+    const categories = await this.ormRepository.find();
     return categories;
   }
 }
