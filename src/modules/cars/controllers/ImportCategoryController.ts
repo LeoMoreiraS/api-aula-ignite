@@ -8,6 +8,6 @@ export class ImportCategoryController {
     const importCategoryService = container.resolve(ImportCategoryService);
     const { file } = request;
     await importCategoryService.execute(file);
-    return response.send();
+    return response.status(201).send();
   }
 }
