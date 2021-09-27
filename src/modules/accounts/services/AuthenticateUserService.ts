@@ -3,6 +3,7 @@ import { validate } from "email-validator";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../../errors/AppError";
 import { IUsersRepository } from "../repositories/interfaces/IUsersRepository";
 
 interface IRequest {
@@ -29,11 +30,11 @@ export class AuthenticateUserService {
     else user = await this.usersRepository.findByUsername(login);
 
     if (!user) {
-      throw new Error("Invalid credentials!");
+      throw new AppError("Invalid credentials!", 401);
     }
 
     const passwordCorrect = await compare(password, user.password);
-    if (!passwordCorrect) throw new Error("Invalid credentials!");
+    if (!passwordCorrect) throw new AppError("Invalid credentials!", 401);
     const token = sign({}, process.env.SECRET, {
       subject: user.id,
       expiresIn: "1d",

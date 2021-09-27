@@ -9,14 +9,11 @@ export class CreateSpecificationController {
       CreateSpecificationService
     );
     const { name, description } = request.body;
-    try {
-      const specification = await createSpecificationService.execute({
-        name,
-        description,
-      });
-      return response.status(201).json(specification);
-    } catch (error) {
-      return response.status(400).json({ error: error.message });
-    }
+
+    const specification = await createSpecificationService.execute({
+      name,
+      description,
+    });
+    return response.status(201).json(specification);
   }
 }
