@@ -21,7 +21,9 @@ export async function ensureAuthenticated(
     const usersRepository = new UsersRepository();
     const user = await usersRepository.findByID(sub);
     if (!user) throw new AppError("Users does not exists");
-    // request.user = user;
+    request.user = {
+      id: user.id,
+    };
     return next();
   } catch (error) {
     throw new AppError("Invalid token", 401);

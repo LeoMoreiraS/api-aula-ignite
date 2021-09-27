@@ -9,6 +9,11 @@ export class UsersRepository implements IUsersRepository {
   constructor() {
     this.ormRepository = getRepository(User);
   }
+  async update(data: User): Promise<User> {
+    await this.ormRepository.save(data);
+    const user = await this.ormRepository.findOne({ id: data.id });
+    return user;
+  }
   async findByID(id: string): Promise<User> {
     const user = await this.ormRepository.findOne(id);
     return user;
