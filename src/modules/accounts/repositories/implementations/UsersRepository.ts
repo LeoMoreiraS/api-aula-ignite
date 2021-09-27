@@ -9,6 +9,10 @@ export class UsersRepository implements IUsersRepository {
   constructor() {
     this.ormRepository = getRepository(User);
   }
+  async findByID(id: string): Promise<User> {
+    const user = await this.ormRepository.findOne(id);
+    return user;
+  }
   async findByUsername(username: string): Promise<User> {
     const user = await this.ormRepository.findOne({ username });
     return user;
