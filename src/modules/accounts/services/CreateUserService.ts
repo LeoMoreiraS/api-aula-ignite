@@ -11,7 +11,7 @@ export class CreateUserService {
     @inject("UsersRepository")
     private usersRepository: IUsersRepository
   ) {}
-  async handle(data: ICreateUserDTO): Promise<User> {
+  async execute(data: ICreateUserDTO): Promise<User> {
     const usernameAlreadyExists = await this.usersRepository.findByUsername(
       data.username
     );
