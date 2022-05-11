@@ -3,7 +3,8 @@ import { validate } from "email-validator";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
-import { AppError } from "../../../errors/AppError";
+import { AppError } from "@errors/AppError";
+
 import { IUsersRepository } from "../repositories/interfaces/IUsersRepository";
 
 interface IRequest {
