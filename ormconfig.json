@@ -6,9 +6,9 @@
     "password":"dev",
     "database":"dbapi",
     "port":"5432",
-    "migrations":["./src/database/migrations/*.ts"],
-    "entities":["./src/modules/**/entities/*.ts"],
+    "migrations":["./src/shared/infra/typeorm/database/migrations/*.ts"],
+    "entities":["./src/modules/**/infra/typeorm/entities/*.ts"],
     "cli":{
-        "migrationsDir":"./src/database/migrations"
+        "migrationsDir":"./src/shared/infra/typeorm/database/migrations"
     }
 }
